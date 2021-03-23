@@ -1,0 +1,58 @@
+﻿@model FFK.Models.Story
+@using FFK.Models
+
+@{
+    ViewData["Title"] = "CreateStory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <form asp-action="CreateStory">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="table">
+            <div class="d-table-cell" style="width:70%">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="d-table-cell" style="width: 10%">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Category"></select>
+            </div>
+            <div class="d-table-cell" style="width: 10%">
+                @Html.ListBox("tags", ViewBag.Tag as MultiSelectList)
+            </div>
+            
+
+
+                <div class="d-table-cell" style="width: 10%">
+                    <label asp-for="IsPosted"></label><br />
+                    <input asp-for="IsPosted" />
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lead" class="control-label"></label>
+
+                <textarea asp-for="Lead" class="form-control textarea" rows="3" cols="3"></textarea>
+                <span asp-validation-for="Lead" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label" height="100" width="3000"></label>
+
+                <textarea asp-for="Text" class="form-control textarea" rows="10" cols="100"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+
+            @*<div class="form-group">
+            <label asp-for="CreatingDate" class="control-label"></label>
+            <input asp-for="CreatingDate" class="form-control" />
+            <span asp-validation-for="CreatingDate" class="text-danger"></span>
+        </div>*@
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+</form>
+</div>

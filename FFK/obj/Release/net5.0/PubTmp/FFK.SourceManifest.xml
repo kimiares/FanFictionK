@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\PubTmp\Out\" />
+  <dbfullsql path="C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\PubTmp\EFSQLScripts\FFK.Data.ApplicationDbContext.sql" />
+</sitemanifest>

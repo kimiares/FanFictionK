@@ -1,0 +1,122 @@
+﻿
+@model FFK.ViewModels.StoryViewModel
+@using FFK.Models
+
+
+@{
+    ViewData["Title"] = "Home Page";
+    
+}
+
+
+
+        <a class="btn btn-link" asp-action="CreateStory" asp-controller="Story">Add story</a>
+        <div class="d-flex justify-content-center">
+            <ul class="list-group list-group-horizontal" style="list-style-type: none">
+                @foreach (var elem in Model.Categories)
+                {
+
+                    <li>@elem.Name</li>
+                }
+            </ul>
+        </div>
+        <div class="d-flex justify-content-center">
+            <ul class="list-group list-group-horizontal" style="list-style-type: none">
+                @foreach (var elem in Model.Tags)
+                {
+
+                    <li>@elem.Name</li>
+                }
+            </ul>
+        </div>
+
+
+
+        <ul style="list-style-type: none" class="border-dark">
+            
+            @foreach (var item in Model.Stories)
+            {
+                <li>
+                    <div class="media">
+                        <img class="align-self-center mr-3" src="..." alt="Generic placeholder image">
+                        <div class="media-body">
+                            <h4 class="mt-0">@Html.DisplayFor(modelItem => item.Title)</h4>
+
+
+                            <p class="mt-0"><i>@Html.DisplayFor(modelItem => item.Category.Name)</i></p>
+
+
+                            <p class="text-lg-right">@Html.DisplayFor(modelItem => item.User.UserName)</p>
+                            <p class="text-lg-right">@Html.DisplayFor(modelItem => item.Tags.Count)</p>
+
+                            <p class="text-lg-right">
+                                @foreach (var tag in item.Tags)
+                                {
+                                    @tag.Name
+
+                                }
+
+                            </p>
+
+
+
+                            <p class="mt-0">@Html.DisplayFor(modelItem => item.Lead)</p>
+                            <p><a class="nav-link" asp-area="" asp-controller="Story" asp-action="ReadSelectStory" asp-route-id="@item.Id">Read...</a></p>
+                        </div>
+                    </div>
+
+
+                </li>
+
+            }
+
+        </ul>
+        <style>
+            @@font-face {
+                font-family: 'FontAwesome';
+                src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal
+            }
+
+            .glyphicon {
+                display: inline-block;
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: inherit;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale
+            }
+
+            .glyphicon-chevron-right:before {
+                content: "\f054";
+            }
+
+            .glyphicon-chevron-left:before {
+                content: "\f053";
+            }
+        </style>
+
+
+        <div class="d-flex justify-content-center">
+            @if (Model.Pagination.HasPreviousPage)
+            {
+                <a asp-action="Index"
+                   asp-route-page="@(Model.Pagination.PageNumber - 1)"
+                   class="btn btn-outline-dark d-flex align-self-center">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    Back
+                </a>
+            }
+            @if (Model.Pagination.HasNextPage)
+            {
+                <a asp-action="Index"
+                   asp-route-page="@(Model.Pagination.PageNumber + 1)"
+                   class="btn btn-outline-dark justify-content-xl-center">
+                    Forward
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                </a>
+            }
+        </div>
+
+    

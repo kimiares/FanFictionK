@@ -1,0 +1,16 @@
+﻿@model FFK.ViewModels.StoryViewModel
+@using FFK.Models
+@{
+    ViewData["Title"] = "Category Home Page";
+}
+
+<ul class="list-group border-left ">
+
+    @foreach (var c in Model.Categories)
+    {
+        <li class="list-group-item ">
+            @c.Name
+        </li>
+    }
+
+</ul>

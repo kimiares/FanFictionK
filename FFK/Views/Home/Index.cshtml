@@ -1,0 +1,23 @@
+﻿@model FFK.ViewModels.StoryViewModel
+@using FFK.Models
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row border-0">
+    
+    <div class="col-md-2">
+        @await Html.PartialAsync("_CategoriesOnHomePage")
+    </div>
+    
+    
+    <div class="col-md-8">
+        @await Html.PartialAsync("_StoriesOnHomePage")
+    </div>
+    <div div class="col-md-2">
+        <p>TAGS CLOUD</p>
+    </div>
+    
+</div>
+
+<a asp-controller="Admin" asp-action="GetAllUsers"> GetAllUsers</a>
