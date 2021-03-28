@@ -20,8 +20,12 @@
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Category"></select>
             </div>
-            <div class="d-table-cell" style="width: 10%">
+            @*<div class="d-table-cell" style="width: 10%">
                 @Html.ListBox("tags", ViewBag.Tag as MultiSelectList)
+            </div>*@
+            <div class="d-table-cell" style="width: 10%">
+                @Html.Label("Tags")
+                @Html.TextBox("tags")
             </div>
             
 

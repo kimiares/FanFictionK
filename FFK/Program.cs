@@ -27,7 +27,7 @@ namespace FFK
                 {
                     var userManager = services.GetRequiredService<UserManager<User>>();
                     var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    await RoleInitialize.InitializeAsync(userManager, rolesManager);
+                    await RoleInitialize.Initialize(userManager, rolesManager);
                 }
                 catch (Exception ex)
                 {

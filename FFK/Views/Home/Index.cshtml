@@ -5,13 +5,10 @@
 }
 
 <div class="row border-0">
+   
+   
     
-    <div class="col-md-2">
-        @await Html.PartialAsync("_CategoriesOnHomePage")
-    </div>
-    
-    
-    <div class="col-md-8">
+    <div class="col-md-10">
         @await Html.PartialAsync("_StoriesOnHomePage")
     </div>
     <div div class="col-md-2">
@@ -20,4 +17,3 @@
     
 </div>
 
-<a asp-controller="Admin" asp-action="GetAllUsers"> GetAllUsers</a>

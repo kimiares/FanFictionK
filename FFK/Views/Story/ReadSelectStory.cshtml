@@ -1,0 +1,23 @@
+﻿@model FFK.ViewModels.ReadStoryViewModel
+@using FFK.Models
+
+
+@{
+    ViewData["Title"] = "ReadSelectStory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h2>@Html.DisplayFor(model => model.Story.Title)</h2>
+    <p class="text-lg-right text-decoration-none">Category: @Html.DisplayFor(model => model.Category.Name) </p>
+    
+    
+    <p class="col-xs-offset-2 col-sm-offset-2 col-xs-8 col-sm-8 text-justify">
+        @Html.DisplayFor(model => model.Story.Text)
+    </p>
+
+
+    <p class="text-lg-right">Authtor: @Html.DisplayFor(model => model.Story.User.UserName) </p>
+
+</div>

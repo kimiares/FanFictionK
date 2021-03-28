@@ -28,6 +28,7 @@ namespace FFK.Controllers
             this.context = context;
         }
         [HttpGet]
+        [Authorize]
         public IActionResult CreateStory()
         {
             ViewBag.Category = new SelectList(context.Categories.ToList(), "Id", "Name");
@@ -44,34 +45,41 @@ namespace FFK.Controllers
         {
 
             Category category = categories.FirstOrDefault(c => c.Id == story.CategoryId);
-
-            
-
-
             story.IsPosted = true;
             story.EditingDate = DateTime.Now;
             story.Image = "image";
             story.User = userManager.Users.FirstOrDefault(u => u.UserName== User.Identity.Name);
-
-            //tags
-            
-
-            //end 
-
-
-
-
-
-            //story.Tags.AddRange(tags)
-            //story.Tags = tags;
-
-
-
-
+            story.Tags = GetTagsFromView(tags);
             context.Stories.Add(story);
             await context.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
+        
         }
+
+
+        public static List<Tag> GetTagsFromView(string tagsOnForm)
+        {
+            var tags = new List<Tag>();
+            
+            if (tagsOnForm == null)
+                return tags;
+            else
+            {
+                string[] tempTags = tagsOnForm.Split(',');
+
+                foreach (var t in tempTags)
+                {
+                    tags.Add(new Tag { Name = t });
+                }
+
+            }
+
+           
+
+            
+            return tags;
+        }
+
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,10 +93,11 @@ namespace FFK.Controllers
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Story story)
+        public async Task<IActionResult> Edit(Story story, string tags)
         {
             Category category = categories.FirstOrDefault(c => c.Id == story.CategoryId);
             story.EditingDate = DateTime.Now;
+            story.Tags = GetTagsFromView(tags);
             context.Stories.Update(story);
             await context.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
@@ -97,20 +106,22 @@ namespace FFK.Controllers
         {
             Story storySelected = await context.Stories.FirstOrDefaultAsync(s => s.Id == id);
             Category categorySelected = await context.Categories.FirstOrDefaultAsync(s => s.Id == storySelected.CategoryId);
-            /*User userSelected = await context.Users.FirstOrDefaultAsync(u => u.UserName == storySelected.User.UserName);*/
+            
 
 
             var ReadStoryViewModel = new ReadStoryViewModel
             {
                 Story = storySelected,
                 Category = categorySelected,
-                Users = userManager.Users.ToList()
+                Users = userManager.Users.ToList(),
+                Tags = storySelected.Tags.ToList()
 
             };
 
             return View(ReadStoryViewModel);
 
         }
+        [Authorize(Roles = "administrator")]
         [HttpPost]
         public async Task<IActionResult> MultiplyStoryDelete(int[] storiesIds)
         {

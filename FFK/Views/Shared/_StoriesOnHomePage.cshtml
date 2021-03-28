@@ -10,25 +10,14 @@
 
 
 
-        <a class="btn btn-link" asp-action="CreateStory" asp-controller="Story">Add story</a>
-        <div class="d-flex justify-content-center">
-            <ul class="list-group list-group-horizontal" style="list-style-type: none">
-                @foreach (var elem in Model.Categories)
-                {
-
-                    <li>@elem.Name</li>
-                }
-            </ul>
-        </div>
-        <div class="d-flex justify-content-center">
-            <ul class="list-group list-group-horizontal" style="list-style-type: none">
-                @foreach (var elem in Model.Tags)
-                {
-
-                    <li>@elem.Name</li>
-                }
-            </ul>
-        </div>
+@if(User.Identity.IsAuthenticated)  {
+      
+<a class="btn btn-link" asp-action="CreateStory" asp-controller="Story"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+</svg></a>
+}
+      
 
 
 
@@ -38,7 +27,7 @@
             {
                 <li>
                     <div class="media">
-                        <img class="align-self-center mr-3" src="..." alt="Generic placeholder image">
+                        @*<img class="align-self-center mr-3" src="..." alt="Generic placeholder image">*@
                         <div class="media-body">
                             <h4 class="mt-0">@Html.DisplayFor(modelItem => item.Title)</h4>
 
@@ -47,21 +36,25 @@
 
 
                             <p class="text-lg-right">@Html.DisplayFor(modelItem => item.User.UserName)</p>
-                            <p class="text-lg-right">@Html.DisplayFor(modelItem => item.Tags.Count)</p>
+                            
 
                             <p class="text-lg-right">
                                 @foreach (var tag in item.Tags)
                                 {
-                                    @tag.Name
+                                    <b class="btn-info">@tag.Name.ToString()</b>
+                                    <span>&nbsp;</span>
 
                                 }
 
                             </p>
 
 
-
                             <p class="mt-0">@Html.DisplayFor(modelItem => item.Lead)</p>
                             <p><a class="nav-link" asp-area="" asp-controller="Story" asp-action="ReadSelectStory" asp-route-id="@item.Id">Read...</a></p>
+                            @if (item.User.UserName == User.Identity.Name)
+                                {
+                        <p><a class="nav-link" asp-area="" asp-controller="Story" asp-action="Edit" asp-route-id="@item.Id">Edit...</a></p>
+                                }
                         </div>
                     </div>
 

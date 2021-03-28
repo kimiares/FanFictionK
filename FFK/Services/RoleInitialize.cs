@@ -9,18 +9,18 @@ namespace FFK.Services
 {
     public class RoleInitialize
     {
-        public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task Initialize(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            string adminEmail = "admin@gmail.com";
+            string adminEmail = "admin@admin.com";
             string password = "123";
-            if (await roleManager.FindByNameAsync("AdminRole") == null)
+            if (await roleManager.FindByNameAsync("administrator") == null)
             {
-                await roleManager.CreateAsync(new IdentityRole("AdminRole"));
+                await roleManager.CreateAsync(new IdentityRole("administrator"));
 
             }
-            if (await roleManager.FindByNameAsync("AuthorRole") == null)
+            if (await roleManager.FindByNameAsync("storyauthtor") == null)
             {
-                await roleManager.CreateAsync(new IdentityRole("AuthorRole"));
+                await roleManager.CreateAsync(new IdentityRole("storyauthtor"));
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
@@ -28,7 +28,7 @@ namespace FFK.Services
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(admin, "AdminRole");
+                    await userManager.AddToRoleAsync(admin, "administrator");
 
                 }
             }

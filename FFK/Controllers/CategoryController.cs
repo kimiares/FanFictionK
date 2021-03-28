@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using FFK.Data;
 using FFK.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FFK.Controllers
 {
+    [Authorize(Roles = "administrator")]
     public class CategoryController : Controller
     {
         ApplicationDbContext context;

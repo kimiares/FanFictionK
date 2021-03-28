@@ -62,10 +62,7 @@ namespace FFK.Controllers
             return View("Index", storyViewModel);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

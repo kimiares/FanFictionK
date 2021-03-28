@@ -57,6 +57,31 @@ namespace FFK
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+
+                    options.ClientId = "252514778882-t0f5tkr69nv2qi75l0s6jr4v70vaf2c8.apps.googleusercontent.com";
+                    options.ClientSecret = "b3RxuNIkChVGI7MkvQIqTF5g";
+
+                })
+                .AddFacebook(options =>
+                {
+                    options.ClientId = "447839299667864";
+                    options.ClientSecret = "78bfb97e8a2dba55559af4728938f906";
+
+
+                })
+                .AddTwitter(options => 
+                {
+                    options.ConsumerKey = "8Ew1OXVGUSSLCGeWBTQlb0thr";
+                    options.ConsumerSecret = "oOax4jpFyiNzkOE99CWIVbuGfTnsSxmRPnvk0VrXlWWXV3RZIR";
+                
+                
+                })
+                
+                
+                ;
             services.AddControllersWithViews();
         }
 

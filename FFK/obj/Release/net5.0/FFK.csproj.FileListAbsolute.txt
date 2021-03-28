@@ -209,3 +209,15 @@ C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\Razor\
 C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\Razor\Views\Admin\GetAllTags.cshtml.g.cs
 C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\Razor\Views\Shared\_CategoriesOnHomePage.cshtml.g.cs
 C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\Razor\Views\Shared\_StoriesOnHomePage.cshtml.g.cs
+C:\Users\Пользователь\source\repos\FFK\FFK\bin\Release\net5.0\Azure.Core.dll
+C:\Users\Пользователь\source\repos\FFK\FFK\bin\Release\net5.0\Azure.Storage.Blobs.dll
+C:\Users\Пользователь\source\repos\FFK\FFK\bin\Release\net5.0\Azure.Storage.Common.dll
+C:\Users\Пользователь\source\repos\FFK\FFK\bin\Release\net5.0\Microsoft.AspNetCore.Authentication.Facebook.dll
+C:\Users\Пользователь\source\repos\FFK\FFK\bin\Release\net5.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\Пользователь\source\repos\FFK\FFK\bin\Release\net5.0\Microsoft.AspNetCore.Authentication.Twitter.dll
+C:\Users\Пользователь\source\repos\FFK\FFK\bin\Release\net5.0\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\Пользователь\source\repos\FFK\FFK\bin\Release\net5.0\Microsoft.WindowsAzure.Storage.dll
+C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\Razor\Views\Admin\EditRole.cshtml.g.cs
+C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\Razor\Views\Story\CreateStory.cshtml.g.cs
+C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\Razor\Views\Story\Edit.cshtml.g.cs
+C:\Users\Пользователь\source\repos\FFK\FFK\obj\Release\net5.0\Razor\Views\Story\ReadSelectStory.cshtml.g.cs

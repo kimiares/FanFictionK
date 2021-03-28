@@ -11,5 +11,6 @@ namespace FFK.ViewModels
         public Story Story { get; set; }
         public Category Category { get; set; }
         public IEnumerable<User> Users { get; set; }
+        public IEnumerable<Tag> Tags { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using FFK.Models;
 using FFK.Services;
 using FFK.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace FFK.Controllers
 {
+    [Authorize(Roles = "administrator")]
     public class AdminController : Controller
     {
         ApplicationDbContext context;
@@ -82,5 +84,50 @@ namespace FFK.Controllers
         {
             return View(context.Tags.ToList());
         }
+
+
+        public async Task<IActionResult> Edit(string userId)
+        {
+           
+            User user = await userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                
+                var userRoles = await userManager.GetRolesAsync(user);
+                var allRoles = roleManager.Roles.ToList();
+                ChangeRoleViewModel model = new ChangeRoleViewModel
+                {
+                    UserId = user.Id,
+                    UserEmail = user.Email,
+                    UserRoles = userRoles,
+                    AllRoles = allRoles
+                };
+                return View(model);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRole(string userId, List<string> roles)
+        {
+            
+            User user = await userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                
+                var userRoles = await userManager.GetRolesAsync(user);
+                var allRoles = roleManager.Roles.ToList();
+                var addedRoles = roles.Except(userRoles);
+                var removedRoles = userRoles.Except(roles);
+                await userManager.AddToRolesAsync(user, addedRoles);
+                await userManager.RemoveFromRolesAsync(user, removedRoles);
+                return RedirectToAction("AdminPage", "Admin");
+            }
+
+            return NotFound();
+        }
+
+
     }
 }
