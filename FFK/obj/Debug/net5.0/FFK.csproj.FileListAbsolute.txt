@@ -221,3 +221,7 @@ C:\Users\Пользователь\source\repos\FFK\FFK\bin\Debug\net5.0\Microsof
 C:\Users\Пользователь\source\repos\FFK\FFK\obj\Debug\net5.0\Razor\Views\Story\ReadSelectStory.cshtml.g.cs
 C:\Users\Пользователь\source\repos\FFK\FFK\obj\Debug\net5.0\Razor\Views\Story\Edit.cshtml.g.cs
 C:\Users\Пользователь\source\repos\FFK\FFK\obj\Debug\net5.0\Razor\Views\Admin\EditRole.cshtml.g.cs
+C:\Users\Пользователь\source\repos\FFK\FFK\obj\Debug\net5.0\Razor\Views\Account\ChangePassword.cshtml.g.cs
+C:\Users\Пользователь\source\repos\FFK\FFK\obj\Debug\net5.0\Razor\Views\Account\EditUser.cshtml.g.cs
+C:\Users\Пользователь\source\repos\FFK\FFK\obj\Debug\net5.0\Razor\Views\Account\PersonalPage.cshtml.g.cs
+C:\Users\Пользователь\source\repos\FFK\FFK\obj\Debug\net5.0\Razor\Views\Shared\_UsersStories.cshtml.g.cs

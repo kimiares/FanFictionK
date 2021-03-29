@@ -37,7 +37,7 @@ namespace FFK.Controllers
         {
 
 
-            int pageSize = 3;
+            int pageSize = 5;
 
 
 

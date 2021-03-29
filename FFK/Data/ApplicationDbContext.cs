@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FFK.ViewModels;
 
 namespace FFK.Data
 {
@@ -19,5 +20,9 @@ namespace FFK.Data
         }
         
         public DbSet<FFK.Models.Role> Role { get; set; }
+        
+        public DbSet<FFK.ViewModels.ChangePasswordViewModel> ChangePasswordViewModel { get; set; }
+        
+        public DbSet<FFK.ViewModels.EditUserViewModel> EditUserViewModel { get; set; }
     }
 }

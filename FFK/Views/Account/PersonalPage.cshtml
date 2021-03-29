@@ -1,0 +1,33 @@
+﻿@model FFK.Models.User
+
+
+@{
+    ViewData["Title"] = "PersonalPage";
+
+}
+<h1>Hi there, @User.Identity.Name</h1>
+
+
+<div>
+    <ul>
+        <li>
+            E-mail: @Html.DisplayFor(m => m.Email)
+        </li>
+        <li>
+            Name: @Html.DisplayFor(m => m.UserName)
+        </li>
+        
+        
+        <li>
+            <a class="btn btn-sm btn-primary" asp-action="EditUser" asp-controller="Account" asp-route-id="@Model.Id">Edit info</a>
+        </li>
+        <li>
+            <a class="btn btn-sm btn-primary" asp-action="ChangePassword" asp-controller="Account" asp-route-id="@Model.Id">Change password</a>
+        </li>
+
+
+    </ul>
+</div>
+@*<div>
+    @await Html.PartialAsync("_UsersStories")
+</div>*@

@@ -86,7 +86,7 @@ namespace FFK.Controllers
         }
 
 
-        public async Task<IActionResult> Edit(string userId)
+        public async Task<IActionResult> EditRole(string userId)
         {
            
             User user = await userManager.FindByIdAsync(userId);
@@ -127,6 +127,7 @@ namespace FFK.Controllers
 
             return NotFound();
         }
+
 
 
     }

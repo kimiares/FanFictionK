@@ -10,7 +10,7 @@
 
 <div>
     <h2>@Html.DisplayFor(model => model.Story.Title)</h2>
-    <p class="text-lg-right text-decoration-none">Category: @Html.DisplayFor(model => model.Category.Name) </p>
+    <p class="text-lg-right text-decoration-none">Category: <b>@Html.DisplayFor(model => model.Category.Name)</b> </p>
     
     
     <p class="col-xs-offset-2 col-sm-offset-2 col-xs-8 col-sm-8 text-justify">
@@ -18,6 +18,6 @@
     </p>
 
 
-    <p class="text-lg-right">Authtor: @Html.DisplayFor(model => model.Story.User.UserName) </p>
+    <p class="text-lg-right">Author: <b>@Html.DisplayFor(model => model.Story.User.UserName)</b> </p>
 
 </div>

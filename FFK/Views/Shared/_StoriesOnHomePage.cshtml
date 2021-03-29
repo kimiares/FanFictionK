@@ -10,14 +10,27 @@
 
 
 
+<ul class="list-group list-group-horizontal justify-content-lg-start">
+
+
 @if(User.Identity.IsAuthenticated)  {
       
-<a class="btn btn-link" asp-action="CreateStory" asp-controller="Story"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
-    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-</svg></a>
+    <li class="list-group-item m-3 p-3">
+    <a class="btn btn-link" asp-action="CreateStory" asp-controller="Story"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+    </svg></a>
+    </li>
 }
+
+    <li class="list-group-item m-3 p-3">
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </li>
       
+</ul>
 
 
 
@@ -32,13 +45,13 @@
                             <h4 class="mt-0">@Html.DisplayFor(modelItem => item.Title)</h4>
 
 
-                            <p class="mt-0"><i>@Html.DisplayFor(modelItem => item.Category.Name)</i></p>
+                            <p class="mt-0"><i>Category: @Html.DisplayFor(modelItem => item.Category.Name)</i><span>&nbsp;</span><b>Author: @Html.DisplayFor(modelItem => item.User.UserName)</b></p>
 
 
-                            <p class="text-lg-right">@Html.DisplayFor(modelItem => item.User.UserName)</p>
+                            @*<p class="text-lg-right">@Html.DisplayFor(modelItem => item.User.UserName)</p>*@
                             
 
-                            <p class="text-lg-right">
+                            <p class="text-lg-left">
                                 @foreach (var tag in item.Tags)
                                 {
                                     <b class="btn-info">@tag.Name.ToString()</b>
@@ -50,11 +63,20 @@
 
 
                             <p class="mt-0">@Html.DisplayFor(modelItem => item.Lead)</p>
-                            <p><a class="nav-link" asp-area="" asp-controller="Story" asp-action="ReadSelectStory" asp-route-id="@item.Id">Read...</a></p>
-                            @if (item.User.UserName == User.Identity.Name)
+                            
+                           
+                            
+                            <p>
+                                <a class="nav-link" asp-area="" asp-controller="Story" asp-action="ReadSelectStory" asp-route-id="@item.Id">Read</a>
+                                <span>&nbsp;</span>
+                                @if (item.User.UserName == User.Identity.Name)
                                 {
-                        <p><a class="nav-link" asp-area="" asp-controller="Story" asp-action="Edit" asp-route-id="@item.Id">Edit...</a></p>
+                                <a class="nav-link" asp-area="" asp-controller="Story" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                                 }
+                            </p>
+
+
+
                         </div>
                     </div>
 
@@ -90,8 +112,7 @@
             }
         </style>
 
-
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center fixed-bottom">
             @if (Model.Pagination.HasPreviousPage)
             {
                 <a asp-action="Index"

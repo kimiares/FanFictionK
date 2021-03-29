@@ -48,19 +48,19 @@ namespace FFK.Controllers
             story.IsPosted = true;
             story.EditingDate = DateTime.Now;
             story.Image = "image";
-            story.User = userManager.Users.FirstOrDefault(u => u.UserName== User.Identity.Name);
+            story.User = userManager.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
             story.Tags = GetTagsFromView(tags);
             context.Stories.Add(story);
             await context.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
-        
+
         }
 
 
         public static List<Tag> GetTagsFromView(string tagsOnForm)
         {
             var tags = new List<Tag>();
-            
+
             if (tagsOnForm == null)
                 return tags;
             else
@@ -74,9 +74,9 @@ namespace FFK.Controllers
 
             }
 
-           
 
-            
+
+
             return tags;
         }
 
@@ -106,7 +106,7 @@ namespace FFK.Controllers
         {
             Story storySelected = await context.Stories.FirstOrDefaultAsync(s => s.Id == id);
             Category categorySelected = await context.Categories.FirstOrDefaultAsync(s => s.Id == storySelected.CategoryId);
-            
+
 
 
             var ReadStoryViewModel = new ReadStoryViewModel
@@ -175,6 +175,29 @@ namespace FFK.Controllers
 
             return PartialView("_StoriesOnHomePage", storyViewModel);
         }
-        
+
+        //public IActionResult UserStories(string id, int page = 1)
+        //{
+        //    int pageSize = 5;
+        //    IQueryable<Story> stories = context.Stories.Where(s => s.User.Id == id);
+        //    var count = stories.Count();
+        //    IEnumerable<Story> storiesToView = stories.Skip((page - 1) * pageSize).Take(pageSize);
+
+        //    Pagination pagination = new Pagination(count, page, pageSize);
+
+        //    var StoryViewModel = new StoryViewModel
+        //    {
+        //        Stories = storiesToView,
+        //        Categories = context.Categories.ToList(),
+        //        Users = userManager.Users.ToList(),
+        //        Tags = context.Tags.ToList(),
+        //        Pagination = pagination
+
+        //    };
+
+        //    return PartialView(StoryViewModel);
+
+
+        //}
     }
 }

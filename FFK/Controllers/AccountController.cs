@@ -41,9 +41,6 @@ namespace FFK.Controllers
                 if (result.Succeeded)
                 {
 
-
-
-                    //await _userManager.AddToRoleAsync(user, "author");
                     await signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -118,7 +115,7 @@ namespace FFK.Controllers
             {
                 User user = new()
                 {
-                    //Email = info.Principal.FindFirst(ClaimTypes.Email).Value,
+                    Email = info.Principal.FindFirst(ClaimTypes.Email).Value,
                     UserName = info.Principal.FindFirst(ClaimTypes.Name).Value,
                     IsActive = true
                 };
@@ -140,7 +137,7 @@ namespace FFK.Controllers
         [AllowAnonymous]
         public IActionResult FacebookLogin()
         {
-            string redirectUrl = Url.Action("SocialNetworkResponse", "Account");
+            string redirectUrl = Url.Action("FacebookResponse", "Account");
             var properties = signInManager.ConfigureExternalAuthenticationProperties("Facebook", redirectUrl);
             return new ChallengeResult("Facebook", properties);
         }
@@ -186,7 +183,129 @@ namespace FFK.Controllers
             }
 
         }
+        public async Task<IActionResult> FacebookResponse()
+        {
+            ExternalLoginInfo info = await signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+                return RedirectToAction(nameof(Login));
+
+            var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
+            //string[] userInfo = { info.Principal.FindFirst(ClaimTypes.Name).Value, info.Principal.FindFirst(ClaimTypes.Email).Value };
+            if (result.Succeeded)
+                //return View(userInfo);
+                return RedirectToAction("Index", "Home");
+            else
+            {
+                User user = new User
+                {
+
+                    UserName = info.Principal.FindFirst(ClaimTypes.Name).Value,
+                    IsActive = true
+                };
+
+                IdentityResult identResult = await userManager.CreateAsync(user);
+                if (identResult.Succeeded)
+                {
+                    identResult = await userManager.AddLoginAsync(user, info);
+                    if (identResult.Succeeded)
+                    {
+                        await signInManager.SignInAsync(user, false);
+                        //return View(userInfo);
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                return NotFound();
+            }
+
+        }
+
+        public async Task<IActionResult> ChangePassword(string id)
+        {
+            User user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            ChangePasswordViewModel model = new ChangePasswordViewModel { Id = user.Id, Email = user.Email };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    IdentityResult result =
+                        await userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User not found");
+                }
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult> EditUser(string id)
+        {
+            User user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    user.Email = model.Email;
+                    user.UserName = model.Name;
 
 
+
+                    var result = await userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+            }
+            return View(model);
+        }
+        public IActionResult PersonalPage()
+        {
+            var userId = userManager.GetUserId(HttpContext.User);
+            User user = userManager.FindByIdAsync(userId).Result;
+            return View(user);
+
+        }
     }
 }

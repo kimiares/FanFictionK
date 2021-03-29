@@ -1,0 +1,11 @@
+﻿
+@model FFK.ViewModels.StoryViewModel
+@using FFK.Models
+
+<ul style="list-style-type: none" class="border-dark">
+    @foreach(var story in Model.Stories)
+            {
+            <li  asp-action="ReadSelectStory" asp-controller="Story" asp-route-id="@story.Id" >@Html.DisplayFor(modelItem => story.Title)</li>
+            }
+    
+</ul>

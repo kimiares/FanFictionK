@@ -26,16 +26,27 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        
+
                         <li class="nav-item">
-                            @if(User.IsInRole("administrator"))
+                            @if (User.IsInRole("administrator"))
                             {
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPage">Admin page</a>
                             }
-                           
-
 
                         </li>
+                        <li>
+                            <div class="container">
+
+                                <a href="javascript:void()"
+                                   class="nav-link"
+                                   id="theme-toggler"
+                                   onclick="toggleTheme()">
+
+                                </a>
+
+                            </div>
+                        </li>
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -48,18 +59,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted navbar-fixed-bottom">
-        <div class="container">
-
-                    <a href="javascript:void()"
-                       class="btn btn-dark"
-                       id="theme-toggler"
-                       onclick="toggleTheme()">
-
-                    </a>
-
-        </div>
-    </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
